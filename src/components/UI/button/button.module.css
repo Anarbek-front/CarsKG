@@ -1,0 +1,22 @@
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    border-radius: 10px;
+}
+
+.primary {
+    background-color: var(--color-btn-main);
+    color: var(--color-text-btn);
+}
+
+.secondary {
+    background-color: var(--color-btn-secondary);
+    color: var(--color-text-btn);
+}
+

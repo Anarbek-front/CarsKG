@@ -1,0 +1,16 @@
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+}
+
+.scrolled {
+    border-color: #e5e7eb;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.container {
+    display: flex;
+    
+}
