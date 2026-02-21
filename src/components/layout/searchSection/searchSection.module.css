@@ -1,0 +1,7 @@
+.search_section_container {
+    background-color: var(--color-bg-secondary);
+    width: 100%;
+    flex: 1;
+    height: 100vh;
+    border-radius: 50px;
+}
