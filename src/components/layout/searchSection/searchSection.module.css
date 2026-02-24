@@ -5,3 +5,7 @@
     height: 100vh;
     border-radius: 50px;
 }
+
+.search_select {
+    border: none;
+}
