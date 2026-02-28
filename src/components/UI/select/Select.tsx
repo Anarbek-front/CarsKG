@@ -8,8 +8,9 @@ import {
     type ReactNode,
     type Ref,
 } from 'react'
-import styles from './select.module.css'
 import type { JSX } from 'react/jsx-runtime'
+import clsx from 'clsx'
+import styles from './select.module.css'
 
 export interface SelectOption<T> {
     label: string
@@ -27,6 +28,7 @@ export interface SelectProps<T> {
     getOptionKey?: (option: SelectOption<T>) => string | number
     disabled?: boolean
     className?: string
+    fullWidth?: boolean
 }
 
 const SelectReusable = <T,>(
@@ -40,6 +42,7 @@ const SelectReusable = <T,>(
         className = '',
         defaultValue,
         value,
+        fullWidth,
     }: SelectProps<T>,
     ref: Ref<HTMLSelectElement>,
 ) => {
@@ -51,10 +54,6 @@ const SelectReusable = <T,>(
     const id = useId()
 
     const selectedValue = isControlled ? value : internalValue
-
-    const selectClass = [styles.select, styles[className]]
-        .filter(Boolean)
-        .join(' ')
 
     const handleChange = useCallback(
         (evnt: ChangeEvent<HTMLSelectElement>) => {
@@ -73,40 +72,58 @@ const SelectReusable = <T,>(
     const memoizedOptions = useMemo(() => options, [options])
 
     return (
-        <select
-            id={id}
-            ref={ref}
-            disabled={disabled}
-            className={selectClass}
-            value={
-                selectedValue !== undefined
-                    ? memoizedOptions.findIndex(
-                          (op) => op.value === selectedValue,
-                      )
-                    : ''
-            }
-            onChange={handleChange}
-        >
-            {selectedValue === undefined && (
-                <option value="" disabled>
-                    {placeholder}
-                </option>
+        <div
+            className={clsx(
+                styles.wrapper,
+                fullWidth && styles.fullWidth,
+                disabled && styles.disabled,
+                className,
             )}
-            {memoizedOptions.map((opt, idx) => {
-                const isSelected = opt.value === selectedValue
-                return (
-                    <option
-                        key={getOptionKey?.(opt ?? idx)}
-                        value={idx}
-                        disabled={opt.disabled}
-                    >
-                        {renderOption
-                            ? renderOption(opt, isSelected)
-                            : opt.label}
+        >
+            <select
+                id={id}
+                ref={ref}
+                disabled={disabled}
+                className={styles.select}
+                value={
+                    selectedValue !== undefined
+                        ? memoizedOptions.findIndex(
+                              (op) => op.value === selectedValue,
+                          )
+                        : ''
+                }
+                onChange={handleChange}
+            >
+                {selectedValue === undefined && (
+                    <option value="" disabled>
+                        {placeholder}
                     </option>
-                )
-            })}
-        </select>
+                )}
+                {memoizedOptions.map((opt, idx) => {
+                    const isSelected = opt.value === selectedValue
+                    return (
+                        <option
+                            key={getOptionKey?.(opt ?? idx)}
+                            value={idx}
+                            disabled={opt.disabled}
+                        >
+                            {renderOption
+                                ? renderOption(opt, isSelected)
+                                : opt.label}
+                        </option>
+                    )
+                })}
+            </select>
+            <span className={styles.chevron} aria-hidden="true" />
+            {/* {helperText && (
+                <div
+                    id={`${id}-help`}
+                    className={clsx(styles.helper, error && styles.helperError)}
+                >
+                    {helperText}
+                </div>
+            )} */}
+        </div>
     )
 }
 

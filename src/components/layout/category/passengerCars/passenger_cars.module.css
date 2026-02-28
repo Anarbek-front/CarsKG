@@ -1,0 +1,19 @@
+.passenger_cars {
+    background-color: rgb(255, 255, 255);
+    padding: 40px;
+    margin-top: 40px;
+    border-radius: 40px;
+}
+
+.navigate {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cards {
+    margin-top: 20px;
+    /* width: min(100%, 920px); */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+}

@@ -1,11 +1,39 @@
 .search_section_container {
     background-color: var(--color-bg-secondary);
     width: 100%;
+    padding: 40px;
     flex: 1;
-    height: 100vh;
+    /* height: 100vh; */
     border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.img_search_cont {
+    display: flex;
+    align-items: center;
+}
+
+.form_text {
+    font-size: 3.75rem;
 }
 
 .search_select {
-    border: none;
+    width: 100px;
+}
+
+.search {
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    bottom: 6%;
+    display: flex;
+    gap: 20px;
+    display: flex;
+}
+
+.select_cont {
+    display: flex;
+    gap: 20px;
 }
